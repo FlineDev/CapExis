@@ -1,3 +1,3 @@
 # CapExis
 
-A description of this package.
+A modern, Swift-native persistance framework for all Swift platforms.
