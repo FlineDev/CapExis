@@ -1,3 +1,3 @@
 # CapExis
 
-A modern, Swift-native persistance framework for all Swift platforms.
+A modern, Swift-native persistance framework for all Apple platforms.

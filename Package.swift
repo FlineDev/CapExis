@@ -7,9 +7,12 @@ let package = Package(
     products: [
         .library(name: "CapExis", targets: ["CapExis"]),
     ],
-    dependencies: [],
+    dependencies: [
+        .package(url: "https://github.com/krzyzanowskim/CryptoSwift.git", from: "1.0.0"),
+        .package(url: "https://github.com/Flinesoft/HandySwift.git", from: "3.0.0"),
+    ],
     targets: [
-        .target(name: "CapExis", dependencies: []),
+        .target(name: "CapExis", dependencies: ["CryptoSwift", "HandySwift"]),
         .testTarget(name: "CapExisTests", dependencies: ["CapExis"]),
     ]
 )

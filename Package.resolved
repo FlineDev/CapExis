@@ -1,0 +1,25 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "CryptoSwift",
+        "repositoryURL": "https://github.com/krzyzanowskim/CryptoSwift.git",
+        "state": {
+          "branch": null,
+          "revision": "3a2acbb32ab68215ee1596ee6004da8e90c3721b",
+          "version": "1.0.0"
+        }
+      },
+      {
+        "package": "HandySwift",
+        "repositoryURL": "https://github.com/Flinesoft/HandySwift.git",
+        "state": {
+          "branch": null,
+          "revision": "4225d7654f87886b09dddf52761fc898e4bfd137",
+          "version": "3.0.0"
+        }
+      }
+    ]
+  },
+  "version": 1
+}
