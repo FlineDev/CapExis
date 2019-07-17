@@ -2,8 +2,16 @@
 import Foundation
 
 struct User {
+    // MARK: - Properties
     var name: String
+    var password: Password
+
     var email: String?
     var birthday: Date?
-    var password: Password
+    var gender: Gender?
+
+    // MARK: - Relationships
+    var posts: [Post]
+    var reactions: [Reaction]
+    var comments: [Comment]
 }

@@ -2,7 +2,9 @@ import CryptoSwift
 import Foundation
 import HandySwift
 
-/// A one-way hash wrapper to use for storing passwords securely.
+/// A one-way hash wrapper to use for storing and verifying passwords securely.
+///
+/// - NOTE: There's no way to decrypt the hash as this is a one-way operation by design.
 public struct Password: Codable {
     private let hash: String
     private let salt: String
