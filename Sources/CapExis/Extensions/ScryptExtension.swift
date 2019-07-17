@@ -23,8 +23,8 @@ extension Scrypt {
     }
 
     /// Runs the key derivation function with a specific password and returns a UTF8 String representation of the results.
-    func calculateString() throws -> String {
+    func calculateBase64String() throws -> String {
         let hashBytes: [UInt8] = try calculate()
-        return String(bytes: hashBytes, encoding: .utf8)!
+        return hashBytes.toBase64()!
     }
 }

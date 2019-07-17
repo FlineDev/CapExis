@@ -13,6 +13,6 @@ let package = Package(
     ],
     targets: [
         .target(name: "CapExis", dependencies: ["CryptoSwift", "HandySwift"]),
-        .testTarget(name: "CapExisTests", dependencies: ["CapExis"]),
+        .testTarget(name: "CapExisTests", dependencies: ["CapExis", "CryptoSwift"]),
     ]
 )

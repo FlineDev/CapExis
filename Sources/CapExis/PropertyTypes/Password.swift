@@ -14,12 +14,12 @@ public struct Password: Codable {
         let saltLength: Int = 16 + Int(randomBelow: 8)!
         let salt = String(randomWithLength: saltLength, allowedCharactersType: .alphaNumeric)
 
-        self.hash = try Scrypt(password: password, salt: salt).calculateString()
+        self.hash = try Scrypt(password: password, salt: salt).calculateBase64String()
         self.salt = salt
     }
 
     public func verify(password: String) throws -> Bool {
-        let hashOfPasswordToVerify = try Scrypt(password: password, salt: salt).calculateString()
+        let hashOfPasswordToVerify = try Scrypt(password: password, salt: salt).calculateBase64String()
         return hash == hashOfPasswordToVerify
     }
 }
