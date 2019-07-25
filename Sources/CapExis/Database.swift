@@ -7,6 +7,7 @@ enum DatabaseError: Error {
 struct Database {
     let name: String
     let path: String
+    let storage: Storage
 
     func create<T: Model>(_ object: T) -> Result<Void, DatabaseError> {
         fatalError() // TODO: not yet implemented

@@ -4,7 +4,7 @@ import Foundation
 struct User {
     // MARK: - Properties
     var name: String
-    var password: Password
+    var password: SecureHashedString
 
     var email: String?
     var birthday: Date?

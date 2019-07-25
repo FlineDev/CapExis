@@ -7,9 +7,9 @@ class ScryptExtensionTests: XCTestCase {
         let password = "myPassword123"
         let salt = "aBcDeFg"
 
-        // retrieved on https://8gwifi.org/scrypt.jsp with N 16384, R 8, P 1 and Length 64
-        let expectedHash = "qYA2T54S2Wrc/iG43ygHruS8nScw2yl9e8kZ+Ee9vRN8kVn88jZchPREX/LFaWRh+Kw49+JVcxE46wtvdAxEhw=="
+        // retrieved on https://www.browserling.com/tools/scrypt with N 16384, r 8, p 1 and Output size 64
+        let expectedHash = "a980364f9e12d96adcfe21b8df2807aee4bc9d2730db297d7bc919f847bdbd137c9159fcf2365c84f4445ff2c5696461f8ac38f7e255731138eb0b6f740c4487"
 
-        XCTAssertEqual(try Scrypt(password: password, salt: salt).calculateBase64String(), expectedHash)
+        XCTAssertEqual(try Scrypt(password: password.bytes, salt: salt.bytes).calculate().toHexString(), expectedHash)
     }
 }
