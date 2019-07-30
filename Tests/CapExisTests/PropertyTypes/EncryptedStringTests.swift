@@ -1,3 +1,4 @@
+import CryptoKit
 @testable import CapExis
 import XCTest
 
@@ -27,22 +28,25 @@ final class EncryptedStringTests: XCTestCase {
                 let encryptedString = try! EncryptedString(plaintext, key: key)
 
                 XCTAssertEqual(try! encryptedString.plaintext(decryptingWithKey: key), plaintext)
-                XCTAssertNil(try! encryptedString.plaintext(decryptingWithKey: alteredKey))
+                XCTAssertThrowsError(try encryptedString.plaintext(decryptingWithKey: alteredKey)) { error in
+                    XCTAssertEqual(error as! CryptoKitError, CryptoKitError.authenticationFailure)
+                }
             }
         }
     }
+}
 
-    func testPerformanceOfInit() {
-        measure {
-            _ = try! EncryptedString("plaintext", key: "key")
-        }
-    }
+extension CryptoKitError: Equatable {
+    public static func ==(lhs: CryptoKitError, rhs: CryptoKitError) -> Bool {
+        switch (lhs, rhs) {
+        case (CryptoKitError.authenticationFailure, CryptoKitError.authenticationFailure),
+             (CryptoKitError.incorrectKeySize, CryptoKitError.incorrectKeySize),
+             (CryptoKitError.incorrectParameterSize, CryptoKitError.incorrectParameterSize),
+             (CryptoKitError.underlyingCoreCryptoError, CryptoKitError.underlyingCoreCryptoError):
+            return true
 
-    func testPerformanceOfPlaintext() {
-        let encryptedString = try! EncryptedString("plaintext", key: "key")
-
-        measure {
-            _ = try! encryptedString.plaintext(decryptingWithKey: "key")
+        default:
+            return false
         }
     }
 }

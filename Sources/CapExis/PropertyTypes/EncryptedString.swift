@@ -1,4 +1,4 @@
-import CryptoSwift
+import CryptoKit
 import Foundation
 import HandySwift
 
@@ -7,32 +7,26 @@ import HandySwift
 /// - NOTE: The saved data can only be read if the key is correct.
 /// - WARNING: Don't use this for sensible data, that is only needed for comparison. Use `FastHashedString` or `SecureHashedString` instead.
 public struct EncryptedString: Codable {
-    private let hashedKey: SecureHashedString
-    private let ciphertext: [UInt8]
-    private let initialVector: [UInt8]
+    /// Includes the combined data, including the ciphertext, the nonce and the authentication tag
+    private let encryptedContent: Data
 
     /// Initializes an EcryptedString from a given plaintext String by crypting it with the given key.
     public init(_ plaintext: String, key: String) throws {
-        let initialVector = ChaCha20.randomIV(12)
-        let plaintextBytes = Array(plaintext.utf8)
+        let hashedKey = SHA256.hash(data: key.data(using: .utf8)!)
+        let symmetricKey = SymmetricKey(data: hashedKey)
+        let plaintextData = plaintext.data(using: .utf8)!
 
-        let keyBytes = key.bytes.sha256()
-
-        self.hashedKey = try SecureHashedString(key)
-
-        self.ciphertext = try ChaCha20(key: keyBytes, iv: initialVector).encrypt(plaintextBytes)
-        self.initialVector = initialVector
+        self.encryptedContent = try ChaChaPoly.seal(plaintextData, using: symmetricKey).combined
     }
 
     /// Decrypts the encrypted String to it's plaintext using the given encryption key.
     ///
     /// - Parameter key: The key to decrypt the encrypted data with.
-    public func plaintext(decryptingWithKey key: String) throws -> String? {
-        guard try hashedKey.plaintextEquals(to: key) else { return nil }
-
-        let keyBytes = key.bytes.sha256()
-        let plaintextBytes = try ChaCha20(key: keyBytes, iv: initialVector).decrypt(ciphertext)
-
-        return String(bytes: plaintextBytes, encoding: .utf8)!
+    public func plaintext(decryptingWithKey key: String) throws -> String {
+        let hashedKey = SHA256.hash(data: key.data(using: .utf8)!)
+        let symmetricKey = SymmetricKey(data: hashedKey)
+        let sealedBox = ChaChaPoly.SealedBox(combined: encryptedContent)!
+        let plaintextData = try ChaChaPoly.open(sealedBox, using: symmetricKey)
+        return String(data: plaintextData, encoding: .utf8)!
     }
 }

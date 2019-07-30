@@ -20,18 +20,4 @@ final class SecureHashedStringTests: XCTestCase {
             XCTAssertFalse(try! hashedString.plaintextEquals(to: alteredPlaintext))
         }
     }
-
-    func testPerformanceOfInit() {
-        measure {
-            _ = try! SecureHashedString("plaintext")
-        }
-    }
-
-    func testPerformanceOfPlaintextEquals() {
-        let secureHashedString = try! SecureHashedString("plaintext")
-
-        measure {
-            _ = try! secureHashedString.plaintextEquals(to: "plaintext")
-        }
-    }
 }

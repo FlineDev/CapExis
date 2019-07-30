@@ -1,4 +1,4 @@
-import CryptoSwift
+import CryptoKit
 import Foundation
 import HandySwift
 
@@ -15,7 +15,8 @@ public struct FastHashedString: Codable {
     ///
     /// - NOTE: Calculates a hash using the SHA-512 algorithm.
     public init(_ plaintext: String) throws {
-        self.hash = plaintext.sha512()
+        let hashData = plaintext.data(using: .utf8)!
+        self.hash = SHA256.hash(data: hashData).description
     }
 
     /// Compares a given plaintext to this objects plaintext by hashing the given parameter and comparing the hashes.
@@ -23,6 +24,7 @@ public struct FastHashedString: Codable {
     /// - Parameter plaintext: The plaintext to compare with the hashed string.
     /// - Returns: `true` if the plaintexts are the same, else `false`.
     public func plaintextEquals(to plaintext: String) throws -> Bool {
-        return hash == plaintext.sha512()
+        let hashData = plaintext.data(using: .utf8)!
+        return hash == SHA256.hash(data: hashData).description
     }
 }
