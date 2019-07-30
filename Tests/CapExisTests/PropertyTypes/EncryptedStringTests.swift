@@ -31,4 +31,18 @@ final class EncryptedStringTests: XCTestCase {
             }
         }
     }
+
+    func testPerformanceOfInit() {
+        measure {
+            _ = try! EncryptedString("plaintext", key: "key")
+        }
+    }
+
+    func testPerformanceOfPlaintext() {
+        let encryptedString = try! EncryptedString("plaintext", key: "key")
+
+        measure {
+            _ = try! encryptedString.plaintext(decryptingWithKey: "key")
+        }
+    }
 }

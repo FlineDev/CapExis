@@ -20,4 +20,18 @@ final class FastHashedStringTests: XCTestCase {
             XCTAssertFalse(try! hashedString.plaintextEquals(to: alteredPlaintext))
         }
     }
+
+    func testPerformanceOfInit() {
+        measure {
+            _ = try! FastHashedString("plaintext")
+        }
+    }
+
+    func testPerformanceOfPlaintextEquals() {
+        let fastHashedString = try! FastHashedString("plaintext")
+
+        measure {
+            _ = try! fastHashedString.plaintextEquals(to: "plaintext")
+        }
+    }
 }
