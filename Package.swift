@@ -1,4 +1,4 @@
-// swift-tools-version:5.1
+// swift-tools-version:5.3
 
 import PackageDescription
 
@@ -9,7 +9,8 @@ let package = Package(
         .library(name: "CapExis", targets: ["CapExis"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/Flinesoft/HandySwift.git", from: "3.0.0"),
+        // Handy Swift features that didn't make it into the Swift standard library.
+        .package(name: "HandySwift", url: "https://github.com/Flinesoft/HandySwift.git", from: "3.2.0"),
     ],
     targets: [
         .target(name: "CapExis", dependencies: ["HandySwift"]),

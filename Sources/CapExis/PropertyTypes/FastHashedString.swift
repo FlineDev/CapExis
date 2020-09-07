@@ -5,15 +5,15 @@ import HandySwift
 /// A one-way (secure) hash wrapper to use for storing data in a non-reversible way. Use for anonymized data which requires fast comparison, like phone numbers.
 ///
 /// - NOTE: This uses a fast encryption method which scales well performance-wise but is hackable with enough computing time (e.g. via brute-force & tables).
-/// - WARNING: Don't use this for securing passwords. Use `SecureHashedString` instead.
+/// - WARNING: Don't use this for securing sensible data like passwords. Use `SecureHashedString` instead.
 public struct FastHashedString: Codable {
     private let hash: String
 
-    /// Initializes a FastHashedString from a given plaintext String.
+    /// Initializes a `FastHashedString` from a given plaintext `String`.
     ///
     /// - Parameter plaintext: The plaintext to be stored securely.
     ///
-    /// - NOTE: Calculates a hash using the SHA-512 algorithm.
+    /// - NOTE: Calculates a hash using the SHA-256 algorithm.
     public init(_ plaintext: String) throws {
         let hashData = plaintext.data(using: .utf8)!
         self.hash = SHA256.hash(data: hashData).description

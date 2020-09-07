@@ -10,7 +10,7 @@ public struct SecureHashedString: Codable {
     private let hash: String
     private let salt: String
 
-    /// Initializes a SecureHashedString from a given plaintext String.
+    /// Initializes a `SecureHashedString` from a given plaintext `String`.
     ///
     /// - Parameter plaintext: The plaintext to be stored securely.
     ///
@@ -32,6 +32,7 @@ public struct SecureHashedString: Codable {
     /// - Returns: `true` if the plaintexts are the same, else `false`.
     public func plaintextEquals(to plaintext: String) throws -> Bool {
         let hashData = "\(plaintext)+\(salt)".data(using: .utf8)!
+
         // TODO: Use secure password hashing function with multiple iterations like PBKDF2, bcrypt or scrypt.
         let hashOfPlaintextToCompare = SHA512.hash(data: hashData).description
         return hash == hashOfPlaintextToCompare
