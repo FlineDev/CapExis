@@ -1,10 +1,11 @@
-@testable import CapExis
 import Foundation
 
-struct Tag {
-    // MARK: - Properties
-    let name: String
+@testable import CapExis
 
-    // MARK: - Relationships
-    var posts: [Post]
+struct Tag {
+   // MARK: - Properties
+   let name: String
+
+   // MARK: - Relationships
+   var posts: [Post]
 }

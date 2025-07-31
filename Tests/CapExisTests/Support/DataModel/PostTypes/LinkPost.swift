@@ -1,12 +1,13 @@
-@testable import CapExis
 import Foundation
 
+@testable import CapExis
+
 class LinkPost: Post {
-    var linkUrl: URL
+   var linkUrl: URL
 
-    init(text: String, linkUrl: URL) {
-        self.linkUrl = linkUrl
+   init(text: String, linkUrl: URL) {
+      self.linkUrl = linkUrl
 
-        super.init(text: text)
-    }
+      super.init(text: text)
+   }
 }

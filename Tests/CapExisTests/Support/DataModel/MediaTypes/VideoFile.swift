@@ -1,13 +1,13 @@
 @testable import CapExis
 
 class VideoFile: MediaFile {
-    var durationInSeconds: Double
-    var originalResolutionInPixels: Size
+   var durationInSeconds: Double
+   var originalResolutionInPixels: Size
 
-    init(path: String, fileSizeInBytes: Int, durationInSeconds: Double, originalResolutionInPixels: Size) {
-        self.durationInSeconds = durationInSeconds
-        self.originalResolutionInPixels = originalResolutionInPixels
+   init(path: String, fileSizeInBytes: Int, durationInSeconds: Double, originalResolutionInPixels: Size) {
+      self.durationInSeconds = durationInSeconds
+      self.originalResolutionInPixels = originalResolutionInPixels
 
-        super.init(path: path, fileSizeInBytes: fileSizeInBytes)
-    }
+      super.init(path: path, fileSizeInBytes: fileSizeInBytes)
+   }
 }

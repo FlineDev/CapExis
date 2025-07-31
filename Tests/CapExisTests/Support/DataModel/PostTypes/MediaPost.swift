@@ -1,11 +1,11 @@
 @testable import CapExis
 
 class MediaPost: Post {
-    let mediaFile: MediaFile
+   let mediaFile: MediaFile
 
-    init(text: String, mediaFile: MediaFile) {
-        self.mediaFile = mediaFile
+   init(text: String, mediaFile: MediaFile) {
+      self.mediaFile = mediaFile
 
-        super.init(text: text)
-    }
+      super.init(text: text)
+   }
 }

@@ -1,11 +1,11 @@
 import Foundation
 
 protocol Model: Codable {
-    static var tableName: String { get }
+   static var tableName: String { get }
 }
 
 extension Model {
-    static var tableName: String {
-        return String(describing: Self.self)
-    }
+   static var tableName: String {
+      String(describing: Self.self)
+   }
 }
