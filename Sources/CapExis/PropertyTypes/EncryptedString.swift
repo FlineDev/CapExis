@@ -25,7 +25,7 @@ public struct EncryptedString: Codable {
    public func plaintext(decryptingWithKey key: String) throws -> String {
       let hashedKey = SHA256.hash(data: key.data(using: .utf8)!)
       let symmetricKey = SymmetricKey(data: hashedKey)
-      let sealedBox = try ChaChaPoly.SealedBox(combined: encryptedContent)
+      let sealedBox = try ChaChaPoly.SealedBox(combined: self.encryptedContent)
       let plaintextData = try ChaChaPoly.open(sealedBox, using: symmetricKey)
       return String(data: plaintextData, encoding: .utf8)!
    }

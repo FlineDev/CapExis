@@ -35,6 +35,6 @@ public struct SecureHashedString: Codable {
 
       // TODO: Use secure password hashing function with multiple iterations like PBKDF2, bcrypt or scrypt.
       let hashOfPlaintextToCompare = SHA512.hash(data: hashData).description
-      return hash == hashOfPlaintextToCompare
+      return self.hash == hashOfPlaintextToCompare
    }
 }

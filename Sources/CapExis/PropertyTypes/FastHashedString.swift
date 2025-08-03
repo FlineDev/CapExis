@@ -25,6 +25,6 @@ public struct FastHashedString: Codable {
    /// - Returns: `true` if the plaintexts are the same, else `false`.
    public func plaintextEquals(to plaintext: String) throws -> Bool {
       let hashData = plaintext.data(using: .utf8)!
-      return hash == SHA256.hash(data: hashData).description
+      return self.hash == SHA256.hash(data: hashData).description
    }
 }
